@@ -8,9 +8,11 @@ public class Hand {
 	List<Card> deck = new ArrayList<Card>();
 
 	public int calculateHandValue(List<Card> hand) {
+		value = 0;
 		for (Card card : hand) {
 			value = value + card.getValue();
 		}
+		System.out.println(value);
 		return value;
 	}
 

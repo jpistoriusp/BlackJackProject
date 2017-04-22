@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-	String name;
+	boolean win = true;
+	Hand hand = new Hand();
 
 	public List<Card> getStartingHand(List<Card> deck) {
 		List<Card> startingHand = new ArrayList<>();
@@ -13,7 +14,15 @@ public class Player {
 		return startingHand;
 	}
 	
-	public List<Card> hit(List<Card> player, List<Card> deck) {
+//	public boolean winCondition(List<Card> playerHand) {
+//		if (hand.calculateHandValue(playerHand) == 21) {
+//			return win;
+//		}
+//		else return false;
+//	}
+	
+	public List<Card> playerChoosesToHit(List<Card> player, List<Card> deck) {
+		//check for deck return.
 		player.add(deck.remove(0));
 		return player;
 	}

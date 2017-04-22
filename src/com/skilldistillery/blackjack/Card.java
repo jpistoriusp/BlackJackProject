@@ -36,7 +36,7 @@ public class Card {
 	public int getValue() {
 		if (rank.ordinal() <= 8) {
 			value = rank.ordinal() + 2;
-		} else if (rank.ordinal() == 13) {
+		} else if (rank.ordinal() == 12) {
 			value = 11;
 		} else {
 			value = 10;
