@@ -12,11 +12,12 @@ public class Hand {
 		for (Card card : hand) {
 			value = value + card.getValue();
 		}
-		System.out.println(value);
 		return value;
 	}
 
-	public void displayHand() {
-
+	public void displayHand(List<Card> hand) {
+		for (Card card : hand) {
+			System.out.print(card.getValue()+" ");
+		}
 	}
 }

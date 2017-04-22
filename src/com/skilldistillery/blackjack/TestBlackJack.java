@@ -28,9 +28,10 @@ public class TestBlackJack {
 		Collections.shuffle(deck);
 		playerHand = player.getStartingHand(deck);
 		dealerHand = dealer.getStartingHand(deck);
-		System.out.println("dealer shows:" + dealerHand.get(0));
-		System.out.println("Hidden card:" + dealerHand.get(1));
-		System.out.println("player hand:" + playerHand);
+		System.out.print("dealer shows:" + dealerHand.get(0).getValue());
+		System.out.println(" Hidden card:" + dealerHand.get(1).getValue());
+		System.out.print("player hand:");
+		hand.displayHand(playerHand);
 
 		if (hand.calculateHandValue(dealerHand) == 21) {
 			System.out.println("Dealer has blackjack. You lose.");
@@ -43,10 +44,12 @@ public class TestBlackJack {
 	// check to see if it is needed to pass Lists.
 	public void playerChoosesToHitOrStay(List<Card> playerHand, List<Card> deck) {
 		while (hand.calculateHandValue(playerHand) < 21) {
-			System.out.println("Would you like to hit? (y or n) ");
+			System.out.println("\nWould you like to hit? (y or n) ");
 			String choice = kb.next();
 			if (choice.toLowerCase() == "y") {
-				player.playerChoosesToHit(playerHand, deck);
+//				player.playerChoosesToHit(playerHand, deck);
+				playerHand.add(deck.remove(2));
+				System.out.println(playerHand.get(2).getValue());
 				playerChoosesToHitOrStay(playerHand, deck);
 			} else {
 				break;
@@ -67,6 +70,9 @@ public class TestBlackJack {
 			System.out.println("Dealer:" +hand.calculateHandValue(dealerHand));
 		}
 		else if (hand.calculateHandValue(playerHand) > hand.calculateHandValue(dealerHand)) {
+			if (hand.calculateHandValue(playerHand) == 21) {
+				System.out.println("Blackjack!");
+			}
 			System.out.println("You win!");
 			System.out.println(playerHand);
 			System.out.println(dealerHand);
