@@ -2,45 +2,37 @@ package com.skilldistillery.blackjack;
 
 public class Card {
 
-	private Rank rank;
-	private Suit suit;
+	private String rank;
+	private String suit;
 	private int value;
 
 	public Card(Rank r, Suit s) {
 		// setRank(r);
-		rank = r;
-		suit = s;
-		value = getValue();
+		rank = r.getName();
+		suit = s.getName();
+		value = r.getValue();
 	}
 
 	public Card() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public Rank getRank() {
+	public String getRank() {
 		return rank;
 	}
-
-	public void setRank(Rank rank) {
+	
+	public void setRank(String rank) {
 		this.rank = rank;
 	}
 
-	public Suit getSuit() {
+	public String getSuit() {
 		return suit;
 	}
 
-	public void setSuit(Suit suit) {
+	public void setSuit(String suit) {
 		this.suit = suit;
 	}
 
 	public int getValue() {
-		if (rank.ordinal() <= 8) {
-			value = rank.ordinal() + 2;
-		} else if (rank.ordinal() == 12) {
-			value = 11;
-		} else {
-			value = 10;
-		}
 		return value;
 	}
 

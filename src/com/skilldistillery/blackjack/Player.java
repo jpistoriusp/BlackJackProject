@@ -14,12 +14,6 @@ public class Player {
 		return startingHand;
 	}
 	
-//	public boolean winCondition(List<Card> playerHand) {
-//		if (hand.calculateHandValue(playerHand) == 21) {
-//			return win;
-//		}
-//		else return false;
-//	}
 	
 	public List<Card> playerChoosesToHit(List<Card> player, List<Card> deck) {
 		//check for deck return.
