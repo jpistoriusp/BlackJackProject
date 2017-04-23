@@ -15,7 +15,7 @@ public class Player {
 	}
 	
 	
-	public List<Card> playerChoosesToHit(List<Card> player, List<Card> deck) {
+	public List<Card> addCardToHand(List<Card> player, List<Card> deck) {
 		//check for deck return.
 		player.add(deck.remove(0));
 		System.out.println(player.get(2).getValue());

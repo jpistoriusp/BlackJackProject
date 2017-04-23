@@ -13,7 +13,7 @@ public class Hand {
 		}
 		return value;
 	}
-	public void displayCurrentHand(List<Card> hand) {
+	public void displayHand(List<Card> hand) {
 		for (Card card : hand) {
 			System.out.print("["+ card.getRank()+ card.getSuit()+"]"+" ");
 		}

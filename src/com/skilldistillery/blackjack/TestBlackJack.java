@@ -1,9 +1,10 @@
 package com.skilldistillery.blackjack;
 
-import java.util.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class TestBlackJack {
 	Scanner kb = new Scanner(System.in);
@@ -23,21 +24,19 @@ public class TestBlackJack {
 	public void play() {
 		// Add comments to code//
 		Scanner kb = new Scanner(System.in);
-		deck = de.generate_52_Cards();
+		deck = de.createDeckFromCards();
 		Collections.shuffle(deck);
 		playerHand = player.getStartingHand(deck);
 		dealerHand = dealer.getStartingHand(deck);
 		System.out.print("Dealer hand: ");
 		hand.displayFirstCard(dealerHand);
-//		System.out.println(" Hidden card:" + dealerHand.get(1).getRank());
 		System.out.print("Player hand: ");
-		hand.displayCurrentHand(playerHand);
-
-		if (hand.getHandValue(dealerHand) == 21) {
-			System.out.println("Dealer has blackjack. You lose.");
-		} else {
-			playerChoosesToHitOrStay();
+		hand.displayHand(playerHand);
+		if (dealerHand.get(0).getValue() >= 10) {
+			dealer.blackjackCheck(dealerHand);
 		}
+
+		playerChoosesToHitOrStay();
 	}
 
 	// check to see if it is needed to pass Lists.
@@ -48,17 +47,17 @@ public class TestBlackJack {
 			if (choice.toLowerCase().equals("y")) {
 				playerHand.add(deck.remove(0));
 				System.out.println("Your drew a: " + playerHand.get(playerHand.size() - 1).getValue());
-				hand.displayCurrentHand(playerHand);
+				hand.displayHand(playerHand);
 				if (hand.getHandValue(playerHand) > 21) {
 					System.out.println("You busted! Dealer wins.");
 					System.exit(0);
 				}
 				playerChoosesToHitOrStay();
 			} else {
-			comparePlayerHandToDealerHand();
-			break;
+				comparePlayerHandToDealerHand();
+				break;
 			}
-		} 
+		}
 		if (hand.getHandValue(playerHand) == 21) {
 			System.out.println("BlackJack! You win!");
 		}
@@ -67,24 +66,25 @@ public class TestBlackJack {
 	public void comparePlayerHandToDealerHand() {
 		if (hand.getHandValue(playerHand) == hand.getHandValue(dealerHand)) {
 			System.out.println("The result is a push.");
-			System.out.println(playerHand);
-			System.out.println(dealerHand);
+			System.out.print("Dealer:");
+			hand.displayHand(dealerHand);
+			System.out.print("\nPlayer:");
+			hand.displayHand(playerHand);
 		} else if (hand.getHandValue(playerHand) < hand.getHandValue(dealerHand)) {
 			System.out.println("You lose.");
-			System.out.println("Player:" + hand.getHandValue(playerHand));
-			System.out.println("Dealer:" + hand.getHandValue(dealerHand));
+			System.out.print("Dealer:");
+			hand.displayHand(dealerHand);
+			System.out.print("\nPlayer:");
+			hand.displayHand(playerHand);
 		} else if (hand.getHandValue(playerHand) > hand.getHandValue(dealerHand)) {
 			if (hand.getHandValue(playerHand) == 21) {
-				System.out.println("Blackjack!");
-				System.out.println("test");
+				System.out.println("21!");
 			}
 			System.out.println("You win!");
-			System.out.println(playerHand);
-			System.out.println(dealerHand);
+			System.out.print("Dealer:");
+			hand.displayHand(dealerHand);
+			System.out.print("\nPlayer:");
+			hand.displayHand(playerHand);
 		}
 	}
 }
-// displays value of first card
-// System.out.println(dealerHand.get(0).getValue());
-// displays value of total hand
-// System.out.println(hand.calculateHandValue(dealerHand));
