@@ -18,6 +18,14 @@ public class Player {
 		return startingHand;
 	}
 		
+	public boolean blackjackCheck(List<Card> h) {
+		if (hand.getHandValue(h) == 21) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public void receiveOneCardFromDealer(Card card) {
 		hand.addCard(card);
 //		return hand;
