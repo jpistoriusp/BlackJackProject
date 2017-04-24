@@ -102,8 +102,7 @@ public class TestBlackJack {
 	}
 
 	public void winCondition() {
-		if (hand.getHandValue(player.getHand().getHand()) < 21)
-
+		if (hand.getHandValue(player.getHand().getHand()) <= 21)
 			if (hand.getHandValue(player.getHand().getHand()) == hand.getHandValue(dealer.getHand().getHand())) {
 				System.out.print("Dealer final hand:");
 				hand.displayHand(dealer.getHand().getHand());
