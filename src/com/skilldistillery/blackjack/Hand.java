@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hand {
+	int value;
+	List<Card> hand = new ArrayList<>();
 
 	public List<Card> getHand() {
 		return hand;
@@ -12,9 +14,11 @@ public class Hand {
 	public void setHand(List<Card> hand) {
 		this.hand = hand;
 	}
-
-	int value;
-	List<Card> hand = new ArrayList<>();
+	
+	public void setValue(int value) {
+		this.value = value;
+	}
+	
 
 	public int getHandValue(List<Card> hand) {
 		value = 0;
@@ -45,4 +49,9 @@ public class Hand {
 	public void clearHand() {
 		this.hand.clear();
 	}
+//	public void aceValueCheck(List<Card> hand) {
+//		if (hand.get(hand.size() - 1).getRank().equals("A") && getHandValue(hand) > 21) {
+//				getValue(hand);
+//		}
+//	}
 }

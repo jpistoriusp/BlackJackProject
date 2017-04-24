@@ -71,6 +71,7 @@ public class TestBlackJack {
 				if (choice.toLowerCase().equals("y")) {
 					player.receiveOneCardFromDealer(dealer.dealOneCardFromDeck());
 					System.out.print("Your drew a: ");
+					
 					hand.displayLastCard(player.getHand().getHand());
 					System.out.print("Player hand: ");
 					hand.displayHand(player.getHand().getHand());
@@ -82,7 +83,8 @@ public class TestBlackJack {
 			} while (choice.toLowerCase().equals("y"));
 		}
 		else {
-			System.out.println("Player has 21!");
+			System.out.println("\nPlayer has Blackjack!");
+			endGameOption();
 		}
 	}
 

@@ -32,10 +32,7 @@ public class Dealer {
 	}
 	
 	public Card dealOneCardFromDeck() {
-		
-		deck.getDeck().remove(0);
-		
-		return card;
+		return deck.getDeck().remove(0);
 	}
 	
 	public void addOneCardToHand(Card card) {
