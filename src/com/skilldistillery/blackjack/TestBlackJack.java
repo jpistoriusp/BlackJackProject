@@ -116,6 +116,8 @@ public class TestBlackJack {
 				hand.displayHand(player.getHand().getHand());
 				System.out.println("\nYou lose.");
 			} else if (hand.getHandValue(player.getHand().getHand()) > hand.getHandValue(dealer.getHand().getHand())) {
+				System.out.print("\nDealer final hand:");
+				hand.displayHand(dealer.getHand().getHand());
 				System.out.print("\nPlayer final hand:");
 				hand.displayHand(player.getHand().getHand());
 				System.out.println("\nYou win!");
