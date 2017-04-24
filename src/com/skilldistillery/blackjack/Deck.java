@@ -8,6 +8,7 @@ public class Deck {
 	List<Card> deck = new ArrayList<>(52);
 	
 	public List<Card> createDeckFromCards() {
+		
 		for (Suit s : Suit.values()) {
 			for (Rank r : Rank.values()) {
 				deck.add(new Card(r, s));
@@ -26,5 +27,9 @@ public class Deck {
 	
 	public void printSize(){
 		System.out.println(deck.size());
+	}
+	
+	public void clearDeck() {
+		this.deck.clear();
 	}
 }

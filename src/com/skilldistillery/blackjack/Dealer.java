@@ -40,6 +40,10 @@ public class Dealer {
 		return deck.getDeck().remove(0);
 	}
 	
+	public void addOneCardToHand(Card card) {
+		hand.addCard(card);
+	}
+	
 	public boolean blackjackCheck(List<Card> h) {
 		if (hand.getHandValue(h) == 21) {
 			return true;
