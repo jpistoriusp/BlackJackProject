@@ -8,12 +8,10 @@ import java.util.concurrent.TimeUnit;
 
 public class TestBlackJack {
 	Scanner kb = new Scanner(System.in);
-	Hand hand = new Hand();
 	Player player = new Player();
 	Dealer dealer = new Dealer();
+	Hand hand = new Hand();
 	Deck deck = new Deck();
-	List<Card> playerHand = new ArrayList<>();
-	List<Card> dealerHand = new ArrayList<>();
 	String choice;
 	// List<Card> deck = new ArrayList<>();
 
