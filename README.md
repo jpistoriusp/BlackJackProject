@@ -1,3 +1,4 @@
 ## Paul's BlackJack Homework Project
 
-This is my week 3 homework project. 
+This is my week 3 homework project. It is a blackjack game that uses class objects that contain low coupling and high cohesion. The deck and card objects are available for use with numerous other card games. 
+In this game, a player and dealer (computer) are presented with two cards from the deck. Only the dealers first card is visible to the player. The player is then prompted to hit or stand with the value they currently have. After reaching a value that the player seems fit, or busting and losing, the dealer deals cards to himself. This follows the standard hit until the hand value is 17 rule. Upon ending, a winner is declared and the user is prompted if they wish to play again.
