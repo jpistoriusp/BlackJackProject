@@ -33,7 +33,7 @@ public class TestBlackJack {
 		hand.displayFirstCard(dealer.getHand().getHand());
 		System.out.print("Player hand: ");
 		hand.displayHand(player.getHand().getHand());
-		
+
 		checkIfDealerHasBlackjack();
 		playerChoosesToHitOrStay();
 		dealerHitsUntilHandValueIs17();
@@ -58,18 +58,19 @@ public class TestBlackJack {
 			}
 		}
 	}
-	
+
 	public void playerChoosesToHitOrStay() {
-		// Runs if player hand value is less than 21.
+		// Runs if player hand value is less than 21. Repeats until player busts
+		// or chooses not to hit.
 		if (hand.getHandValue(player.getHand().getHand()) < 21) {
 			do {
 				System.out.println("\nWould you like to hit? (y or n) ");
 				choice = kb.next();
-			
+
 				if (choice.toLowerCase().equals("y")) {
 					player.receiveOneCardFromDealer(dealer.dealOneCardFromDeck());
 					System.out.print("Your drew a: ");
-					
+
 					hand.displayLastCard(player.getHand().getHand());
 					System.out.print("Player hand: ");
 					hand.displayHand(player.getHand().getHand());
@@ -77,16 +78,16 @@ public class TestBlackJack {
 						System.out.println("\nYou busted! Dealer wins.");
 						endGameOption();
 					}
-				} 
+				}
 			} while (choice.toLowerCase().equals("y"));
-		}
-		else {
+		} else {
 			System.out.println("\nPlayer has Blackjack!");
 			endGameOption();
 		}
 	}
 
-	// Runs if dealers hand value is less than 17.
+	// Runs if dealers hand value is less than 17. Repeats until dealer busts or
+	// reaches at least 17
 	public void dealerHitsUntilHandValueIs17() {
 		while (hand.getHandValue(dealer.getHand().getHand()) < 17) {
 			dealer.addOneCardToHand(dealer.dealOneCardFromDeck());
@@ -123,7 +124,9 @@ public class TestBlackJack {
 				System.out.println("\nYou win!");
 			}
 	}
-	//Prompts the user to play again. If yes clears the deck and hands. If no the program exits.
+
+	// Prompts the user to play again. If yes clears the deck and hands. If no
+	// the program exits.
 	public void endGameOption() {
 		System.out.println("\nWould you like to play again? (y/n): ");
 		choice = kb.next();
