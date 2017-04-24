@@ -14,6 +14,7 @@ public class TestBlackJack {
 	Deck deck = new Deck();
 	List<Card> playerHand = new ArrayList<>();
 	List<Card> dealerHand = new ArrayList<>();
+	String choice = null;
 	// List<Card> deck = new ArrayList<>();
 
 	public static void main(String[] args) {
@@ -50,16 +51,17 @@ public class TestBlackJack {
 			}
 		}
 		playerChoosesToHitOrStay();
-		if (hand.getHandValue(player.getHand().getHand()) <= 21) {
-			dealerHitsUntilHandValueIs17();
-		}
-		if (hand.getHandValue(player.getHand().getHand()) < 21 && hand.getHandValue(dealer.getHand().getHand()) < 21) {
+		
+		dealerHitsUntilHandValueIs17();
+		
+//		if (hand.getHandValue(player.getHand().getHand()) < 21 && hand.getHandValue(dealer.getHand().getHand()) < 21) {
 			winCondition();
-		}
+		
 		System.out.println("\nWould you like to play again? (y/n): ");
 		String choice = kb.next();
 		if (choice.toLowerCase().equals("y")) {
 			deck.clearDeck();
+			choice = null;
 			play();
 		}
 	}
@@ -82,12 +84,8 @@ public class TestBlackJack {
 					System.out.println("\nYou busted! Dealer wins.");
 					break;
 				}
-				else {
-					playerChoosesToHitOrStay();
-				}
 			}
-			else{
-				dealerHitsUntilHandValueIs17();
+			else {
 				break;
 			}
 		}
@@ -118,13 +116,12 @@ public class TestBlackJack {
 			hand.displayHand(player.getHand().getHand());
 			System.out.println("\nThe result is a push.");
 		} else if (hand.getHandValue(player.getHand().getHand()) < hand.getHandValue(dealer.getHand().getHand())) {
+			System.out.print("\nDealer:");
+			hand.displayHand(dealer.getHand().getHand());
 			System.out.print("\nPlayer:");
 			hand.displayHand(player.getHand().getHand());
 			System.out.println("\nYou lose.");
 		} else if (hand.getHandValue(player.getHand().getHand()) > hand.getHandValue(dealer.getHand().getHand())) {
-			if (hand.getHandValue(player.getHand().getHand()) == 21) {
-				System.out.println("21!");
-			}
 			System.out.print("\nPlayer:");
 			hand.displayHand(player.getHand().getHand());
 			System.out.println("\nYou win!");
