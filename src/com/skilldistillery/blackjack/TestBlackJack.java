@@ -14,7 +14,7 @@ public class TestBlackJack {
 	Deck deck = new Deck();
 	List<Card> playerHand = new ArrayList<>();
 	List<Card> dealerHand = new ArrayList<>();
-	String choice = null;
+	String choice;
 	// List<Card> deck = new ArrayList<>();
 
 	public static void main(String[] args) {
@@ -35,62 +35,54 @@ public class TestBlackJack {
 		hand.displayFirstCard(dealer.getHand().getHand());
 		System.out.print("Player hand: ");
 		hand.displayHand(player.getHand().getHand());
+		
+		checkIfDealerHasBlackjack();
+		playerChoosesToHitOrStay();
+		dealerHitsUntilHandValueIs17();
+		winCondition();
+		endGameOption();
+	}
 
-		// Checks to see if dealer has blackjack. If dealer has blackjack the
-		// game ends immediately. If not the game continues.
+	// Checks to see if dealer has blackjack. If dealer has blackjack the
+	// game ends immediately. If not the game continues.
+	public void checkIfDealerHasBlackjack() {
 		if (dealer.getHand().getHand().get(0).getValue() >= 10) {
 			System.out.println("\nDealer is checking for blackjack...");
 			try {
 				TimeUnit.SECONDS.sleep(1);
 			} catch (InterruptedException exp) {
 			}
-			if (dealer.blackjackCheck(dealer.getHand().getHand())) {
+			if (dealer.returnsTrueIfDealerHasBlackjack(dealer.getHand().getHand())) {
 				System.out.println("Dealer has blackjack. You Lose.");
+				endGameOption();
 			} else {
 				System.out.println("Dealer does not have blackjack.");
 			}
 		}
-		playerChoosesToHitOrStay();
-		
-		dealerHitsUntilHandValueIs17();
-		
-//		if (hand.getHandValue(player.getHand().getHand()) < 21 && hand.getHandValue(dealer.getHand().getHand()) < 21) {
-			winCondition();
-		
-		System.out.println("\nWould you like to play again? (y/n): ");
-		String choice = kb.next();
-		if (choice.toLowerCase().equals("y")) {
-			deck.clearDeck();
-			choice = null;
-			play();
-		}
 	}
-
+	
 	public void playerChoosesToHitOrStay() {
-		// Continues while the player hand value is less than 21.
-		while (hand.getHandValue(player.getHand().getHand()) < 21) {
-			System.out.println("\nWould you like to hit? (y or n) ");
-			String choice = kb.next();
-			// If player chooses to hit, add one card to his hand from the deck
-			// and check if hand value is over 21. If hand is under 21 re-prompt
-			// user to hit, if over 21 player busts and game is over.
-			if (choice.toLowerCase().equals("y")) {
-				player.receiveOneCardFromDealer(dealer.dealOneCardFromDeck());
-				System.out.print("Your drew a: ");
-				hand.displayLastCard(player.getHand().getHand());
-				System.out.print("Player hand: ");
-				hand.displayHand(player.getHand().getHand());
-				if (hand.getHandValue(player.getHand().getHand()) > 21) {
-					System.out.println("\nYou busted! Dealer wins.");
-					break;
-				}
-			}
-			else {
-				break;
-			}
+		// Runs if player hand value is less than 21.
+		if (hand.getHandValue(player.getHand().getHand()) < 21) {
+			do {
+				System.out.println("\nWould you like to hit? (y or n) ");
+				choice = kb.next();
+			
+				if (choice.toLowerCase().equals("y")) {
+					player.receiveOneCardFromDealer(dealer.dealOneCardFromDeck());
+					System.out.print("Your drew a: ");
+					hand.displayLastCard(player.getHand().getHand());
+					System.out.print("Player hand: ");
+					hand.displayHand(player.getHand().getHand());
+					if (hand.getHandValue(player.getHand().getHand()) > 21) {
+						System.out.println("\nYou busted! Dealer wins.");
+						endGameOption();
+					}
+				} 
+			} while (choice.toLowerCase().equals("y"));
 		}
-		if (hand.getHandValue(player.getHand().getHand()) == 21) {
-			System.out.println("\nYou have Blackjack!");
+		else {
+			System.out.println("Player has 21!");
 		}
 	}
 
@@ -104,27 +96,43 @@ public class TestBlackJack {
 			hand.displayHand(dealer.getHand().getHand());
 			if (hand.getHandValue(dealer.getHand().getHand()) > 21) {
 				System.out.println("\n Dealer busted! You win!");
+				endGameOption();
 			}
 		}
 	}
 
 	public void winCondition() {
-		if (hand.getHandValue(player.getHand().getHand()) == hand.getHandValue(dealer.getHand().getHand())) {
-			System.out.print("Dealer:");
-			hand.displayHand(dealer.getHand().getHand());
-			System.out.print("\nPlayer:");
-			hand.displayHand(player.getHand().getHand());
-			System.out.println("\nThe result is a push.");
-		} else if (hand.getHandValue(player.getHand().getHand()) < hand.getHandValue(dealer.getHand().getHand())) {
-			System.out.print("\nDealer:");
-			hand.displayHand(dealer.getHand().getHand());
-			System.out.print("\nPlayer:");
-			hand.displayHand(player.getHand().getHand());
-			System.out.println("\nYou lose.");
-		} else if (hand.getHandValue(player.getHand().getHand()) > hand.getHandValue(dealer.getHand().getHand())) {
-			System.out.print("\nPlayer:");
-			hand.displayHand(player.getHand().getHand());
-			System.out.println("\nYou win!");
+		if (hand.getHandValue(player.getHand().getHand()) < 21)
+
+			if (hand.getHandValue(player.getHand().getHand()) == hand.getHandValue(dealer.getHand().getHand())) {
+				System.out.print("Dealer final hand:");
+				hand.displayHand(dealer.getHand().getHand());
+				System.out.print("\nPlayer final hand:");
+				hand.displayHand(player.getHand().getHand());
+				System.out.println("\nThe result is a push.");
+			} else if (hand.getHandValue(player.getHand().getHand()) < hand.getHandValue(dealer.getHand().getHand())) {
+				System.out.print("\nDealer final hand:");
+				hand.displayHand(dealer.getHand().getHand());
+				System.out.print("\nPlayer final hand:");
+				hand.displayHand(player.getHand().getHand());
+				System.out.println("\nYou lose.");
+			} else if (hand.getHandValue(player.getHand().getHand()) > hand.getHandValue(dealer.getHand().getHand())) {
+				System.out.print("\nPlayer final hand:");
+				hand.displayHand(player.getHand().getHand());
+				System.out.println("\nYou win!");
+			}
+	}
+	//Prompts the user to play again. If yes clears the deck and hands. If no the program exits.
+	public void endGameOption() {
+		System.out.println("\nWould you like to play again? (y/n): ");
+		choice = kb.next();
+		if (choice.toLowerCase().equals("y")) {
+			deck.clearDeck();
+			dealer.getHand().getHand().clear();
+			choice = null;
+			play();
+		} else {
+			System.exit(0);
 		}
 	}
 }

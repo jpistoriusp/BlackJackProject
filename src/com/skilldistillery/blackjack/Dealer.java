@@ -7,8 +7,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Dealer {
 	Hand hand = new Hand();
-	Deck deck;
 	Card card = new Card();
+	Deck deck;
 	
 	public Dealer(){
 		deck = new Deck();
@@ -28,23 +28,21 @@ public class Dealer {
 		startingHand.add(deck.getDeck().remove(0));
 		hand.addCard(deck.getDeck().remove(0));
 		startingHand.add(deck.getDeck().remove(0));
-		System.out.print("Deck Size: ");
-		deck.printSize();
 		return startingHand;
 	}
 	
 	public Card dealOneCardFromDeck() {
-//		card.add(deck.getDeck().remove(0));
-//		System.out.print("Deck Size: ");
-//		deck.printSize();
-		return deck.getDeck().remove(0);
+		
+		deck.getDeck().remove(0);
+		
+		return card;
 	}
 	
 	public void addOneCardToHand(Card card) {
 		hand.addCard(card);
 	}
 	
-	public boolean blackjackCheck(List<Card> h) {
+	public boolean returnsTrueIfDealerHasBlackjack(List<Card> h) {
 		if (hand.getHandValue(h) == 21) {
 			return true;
 		} else {

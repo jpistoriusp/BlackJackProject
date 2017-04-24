@@ -42,4 +42,7 @@ public class Hand {
 	public void addCard(Card card) {
 		hand.add(card);
 	}
+	public void clearHand() {
+		this.hand.clear();
+	}
 }
